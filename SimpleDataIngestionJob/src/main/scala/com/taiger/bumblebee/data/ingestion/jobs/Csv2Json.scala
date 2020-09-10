@@ -3,14 +3,16 @@ package com.taiger.bumblebee.data.ingestion.jobs
 import org.apache.spark.sql
 import org.apache.spark.sql.{Dataset, SparkSession}
 
-class Csv2Json {
+object Csv2Json {
 
-  def startDataIngestion(): Unit = {
+  def main(args: Array[String]): Unit = {
+    val input = args(0);
+    val output = args(1);
 
     val session = connectToSpark()
-    val df = readingCSVfile(session)
+    val df = readingCSVfile(session, input)
     processCSVFile(df)
-    transformCSVJson(df)
+    transformCSVJson(df, output)
   }
 
   def connectToSpark(): SparkSession = {
@@ -19,7 +21,7 @@ class Csv2Json {
     return session
   }
 
-  def readingCSVfile(session: SparkSession): sql.DataFrame = {
+  def readingCSVfile(session: SparkSession, input: String): sql.DataFrame = {
     val df= session.read.options(Map("inferSchema"->"false","delimiter"->",","header"->"true","multiline"->"true"))
       .schema("accession_no_csv string, Image string, object_work_type string, title_text string, preference string, " +
         "title_language string, creator_2 string, creator_1 string, creator_role string, creation_date string, " +
@@ -31,7 +33,8 @@ class Csv2Json {
         "context_11 string, context_12 string, context_13 string, context_14 string, context_15 string, context_16 string, " +
         "context_17 string, context_18 string, context_19 string, context_20 string, context_21 string, context_22 string, " +
         "context_23 string, context_24 string, sgcool_label_text string")
-      .csv("inputfile/Consolidated_R2_20190327.csv")
+      .csv(input)
+      // .csv("inputfile/Consolidated_R2_20190327.csv")
      return df
   }
 
@@ -43,19 +46,20 @@ class Csv2Json {
     println("Dataframe's schema:")
   }
 
-  def transformCSVJson(df: sql.DataFrame): Unit = {
+  def transformCSVJson(df: sql.DataFrame, output: String): Unit = {
     println("transformCSVJson")
     df.write
-      .json("inputfile/json/Consolidated_R2_20190327.json")
+      .json(output)
+      // .json("inputfile/json/Consolidated_R2_20190327.json")
   }
 
 }
 
 
-object DataIngestionObj extends App {
+// object DataIngestionObj extends App {
 
-  val csv2jsonobj = new Csv2Json
-  csv2jsonobj.startDataIngestion()
+//   val csv2jsonobj = new Csv2Json
+//   csv2jsonobj.startDataIngestion()
 
 
-}
+// }

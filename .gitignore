@@ -1,0 +1,7 @@
+
+target/
+.project
+.setting/
+output/
+project/project/
+.DS_Store
