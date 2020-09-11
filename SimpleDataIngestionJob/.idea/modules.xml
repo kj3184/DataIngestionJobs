@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SimpleDataIngestionJob.iml" filepath="$PROJECT_DIR$/.idea/modules/SimpleDataIngestionJob.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SimpleDataIngestionJob-build.iml" filepath="$PROJECT_DIR$/.idea/modules/SimpleDataIngestionJob-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SparkJobs.iml" filepath="$PROJECT_DIR$/.idea/modules/SparkJobs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SparkJobs-build.iml" filepath="$PROJECT_DIR$/.idea/modules/SparkJobs-build.iml" />
     </modules>
   </component>
 </project>

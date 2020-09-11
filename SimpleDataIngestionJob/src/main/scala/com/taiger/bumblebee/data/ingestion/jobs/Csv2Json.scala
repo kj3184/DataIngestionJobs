@@ -9,8 +9,16 @@ class Csv2Json {
 
     val session = connectToSpark()
     val df = readingCSVfile(session)
-    processCSVFile(df)
-    transformCSVJson(df)
+    /**
+     * Remove null string from raw files
+     */
+    val nonNullDf = df.na.fill("");
+    /*
+    * Based nonNullDf to print Json
+    * */
+    processCSVFile(nonNullDf)
+    transformCSVJson(nonNullDf)
+
   }
 
   def connectToSpark(): SparkSession = {
